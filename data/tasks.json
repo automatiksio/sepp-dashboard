@@ -1,0 +1,232 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdated": "2026-01-31T15:00:00Z",
+    "owner": "sepp"
+  },
+  "tasks": {
+    "sepp": [
+      {
+        "id": "S-019",
+        "title": "Dashboard MVP bauen",
+        "status": "in_progress",
+        "priority": "high",
+        "project": "infrastruktur",
+        "created": "2026-01-31",
+        "due": null,
+        "notes": "Aktuell in Arbeit"
+      },
+      {
+        "id": "S-018",
+        "title": "TENIOS API evaluieren",
+        "status": "todo",
+        "priority": "medium",
+        "project": "voice-ai",
+        "created": "2026-01-31",
+        "due": null,
+        "notes": "Für eigenen Voice-Stack"
+      },
+      {
+        "id": "S-017",
+        "title": "Fonio testen",
+        "status": "blocked",
+        "priority": "medium",
+        "project": "voice-ai",
+        "created": "2026-01-31",
+        "due": null,
+        "blockedBy": "Chris Account",
+        "notes": "Warte auf Chris"
+      },
+      {
+        "id": "S-014",
+        "title": "MedExperts Präsentation für Dienstag",
+        "status": "done",
+        "priority": "high",
+        "project": "medexperts",
+        "created": "2026-01-31",
+        "completed": "2026-01-31",
+        "notes": "16 Slides"
+      },
+      {
+        "id": "S-013",
+        "title": "MedExperts Berater-Verwaltung Prototyp",
+        "status": "done",
+        "priority": "high",
+        "project": "medexperts",
+        "created": "2026-01-31",
+        "completed": "2026-01-31"
+      },
+      {
+        "id": "S-012",
+        "title": "MedExperts Website bauen",
+        "status": "done",
+        "priority": "high",
+        "project": "medexperts",
+        "created": "2026-01-31",
+        "completed": "2026-01-31",
+        "notes": "Prototyp fertig, Design überarbeitet"
+      },
+      {
+        "id": "S-016",
+        "title": "EU/DE KI-Strategie (GHL-Alternativen)",
+        "status": "done",
+        "priority": "high",
+        "project": "voice-ai",
+        "created": "2026-01-31",
+        "completed": "2026-01-31",
+        "notes": "An Chris geschickt"
+      },
+      {
+        "id": "S-015",
+        "title": "Voice AI Businessplan",
+        "status": "done",
+        "priority": "high",
+        "project": "voice-ai",
+        "created": "2026-01-31",
+        "completed": "2026-01-31",
+        "notes": "Komplette Kostenrechnung"
+      },
+      {
+        "id": "S-010",
+        "title": "MedExperts Strategiepapier",
+        "status": "done",
+        "priority": "high",
+        "project": "medexperts",
+        "created": "2026-01-31",
+        "completed": "2026-01-31"
+      }
+    ],
+    "chris": [
+      {
+        "id": "C-009",
+        "title": "MedExperts Logo bestätigen",
+        "status": "done",
+        "priority": "high",
+        "project": "medexperts",
+        "created": "2026-01-31",
+        "completed": "2026-01-31"
+      },
+      {
+        "id": "C-011",
+        "title": "Strategiepapiere prüfen",
+        "status": "todo",
+        "priority": "high",
+        "project": "review",
+        "created": "2026-01-31",
+        "notes": "EU-KI, Voice-AI, MedExperts"
+      },
+      {
+        "id": "C-003",
+        "title": "Brave Search API Key besorgen",
+        "status": "todo",
+        "priority": "medium",
+        "project": "infrastruktur",
+        "created": "2026-01-31",
+        "notes": "Für Web-Recherche"
+      },
+      {
+        "id": "C-012",
+        "title": "Fonio Account erstellen",
+        "status": "todo",
+        "priority": "medium",
+        "project": "voice-ai",
+        "created": "2026-01-31"
+      },
+      {
+        "id": "C-002",
+        "title": "sepp@automatiks.io einrichten",
+        "status": "todo",
+        "priority": "medium",
+        "project": "infrastruktur",
+        "created": "2026-01-31"
+      },
+      {
+        "id": "C-001",
+        "title": "Interview mit Sepp",
+        "status": "backlog",
+        "priority": "medium",
+        "project": "onboarding",
+        "created": "2026-01-31"
+      },
+      {
+        "id": "C-004",
+        "title": "automatiks.io Impressum",
+        "status": "backlog",
+        "priority": "medium",
+        "project": "legal",
+        "created": "2026-01-31"
+      },
+      {
+        "id": "C-014",
+        "title": "Google Drive / Vector Store Setup",
+        "status": "backlog",
+        "priority": "low",
+        "project": "infrastruktur",
+        "created": "2026-01-31"
+      }
+    ]
+  },
+  "projects": {
+    "medexperts": {
+      "name": "MedExperts",
+      "status": "active",
+      "progress": 85,
+      "color": "#00B4B4"
+    },
+    "voice-ai": {
+      "name": "Voice AI / automatiks.io",
+      "status": "active",
+      "progress": 40,
+      "color": "#E85D9C"
+    },
+    "infrastruktur": {
+      "name": "Infrastruktur",
+      "status": "active",
+      "progress": 30,
+      "color": "#F7941D"
+    },
+    "onboarding": {
+      "name": "Onboarding",
+      "status": "paused",
+      "progress": 60,
+      "color": "#64748B"
+    }
+  },
+  "activity": [
+    {
+      "timestamp": "2026-01-31T15:00:00Z",
+      "action": "task_started",
+      "taskId": "S-019",
+      "description": "Dashboard MVP bauen gestartet"
+    },
+    {
+      "timestamp": "2026-01-31T14:55:00Z",
+      "action": "task_completed",
+      "taskId": "C-009",
+      "description": "MedExperts Logo bestätigt"
+    },
+    {
+      "timestamp": "2026-01-31T14:30:00Z",
+      "action": "file_updated",
+      "description": "MedExperts Website überarbeitet (professioneller Look)"
+    },
+    {
+      "timestamp": "2026-01-31T12:30:00Z",
+      "action": "task_completed",
+      "taskId": "S-014",
+      "description": "Präsentation für Dienstag fertig (16 Slides)"
+    },
+    {
+      "timestamp": "2026-01-31T12:25:00Z",
+      "action": "task_completed",
+      "taskId": "S-013",
+      "description": "Berater-Verwaltung Prototyp fertig"
+    },
+    {
+      "timestamp": "2026-01-31T12:20:00Z",
+      "action": "task_completed",
+      "taskId": "S-012",
+      "description": "MedExperts Website Prototyp fertig"
+    }
+  ]
+}

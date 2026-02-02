@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepp ⚡ Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-secondary: #12121a;
+            --card-bg: rgba(255,255,255,0.03);
+            --border: rgba(255,255,255,0.08);
+            --text: #ffffff;
+            --muted: #64748b;
+            --accent: #4285F4;
+            --accent-hover: #5E9EFF;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --purple: #8b5cf6;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+        
+        /* Grid Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .logo-text span {
+            color: var(--muted);
+            font-weight: 400;
+            font-size: 0.8rem;
+            display: block;
+        }
+        
+        /* Navigation */
+        .nav-section {
+            margin-bottom: 24px;
+        }
+        
+        .nav-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 12px;
+            padding-left: 12px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: var(--card-bg);
+            color: var(--text);
+        }
+        
+        .nav-item.active {
+            background: rgba(66, 133, 244, 0.15);
+            color: var(--accent);
+        }
+        
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .nav-badge {
+            margin-left: auto;
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        /* Status Indicator */
+        .status-card {
+            margin-top: auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .status-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .status-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-details {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+        
+        /* Main Content */
+        .main {
+            padding: 32px;
+            overflow-y: auto;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+        
+        .page-subtitle {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+        }
+        
+        .stat-icon.blue { background: rgba(66, 133, 244, 0.15); }
+        .stat-icon.green { background: rgba(34, 197, 94, 0.15); }
+        .stat-icon.purple { background: rgba(139, 92, 246, 0.15); }
+        .stat-icon.orange { background: rgba(245, 158, 11, 0.15); }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        
+        /* Section */
+        .section {
+            margin-bottom: 32px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            border-color: var(--accent);
+        }
+        
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-title {
+            font-weight: 600;
+        }
+        
+        .card-subtitle {
+            color: var(--muted);
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .badge-success { background: rgba(34, 197, 94, 0.15); color: var(--success); }
+        .badge-warning { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+        .badge-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); }
+        .badge-info { background: rgba(66, 133, 244, 0.15); color: var(--accent); }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .action-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text);
+            text-decoration: none;
+        }
+        
+        .action-btn:hover {
+            background: rgba(66, 133, 244, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .action-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--border);
+        }
+        
+        .action-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .action-hint {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+        
+        /* Skills List */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: var(--border);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .skill-tag.active {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+        }
+        
+        .skill-tag.pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+        
+        /* Memory Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg);
+        }
+        
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+        
+        .timeline-content {
+            font-size: 0.9rem;
+        }
+        
+        /* Table */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table th, .table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .table th {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            font-weight: 500;
+        }
+        
+        .table td {
+            font-size: 0.9rem;
+        }
+        
+        .table tr:hover td {
+            background: var(--card-bg);
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+        
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">⚡</div>
+                <div class="logo-text">
+                    Sepp
+                    <span>Command Center</span>
+                </div>
+            </div>
+            
+            <nav>
+                <div class="nav-section">
+                    <div class="nav-title">Übersicht</div>
+                    <div class="nav-item active" onclick="showPage('overview')">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </div>
+                    <div class="nav-item" onclick="showPage('clients')">
+                        <span class="nav-icon">👥</span>
+                        Kunden
+                        <span class="nav-badge">1</span>
+                    </div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">Tools</div>
+                    <div class="nav-item" onclick="showPage('skills')">
+                        <span class="nav-icon">🧩</span>
+                        Skills
+                        <span class="nav-badge">6</span>
+                    </div>
+                    <div class="nav-item" onclick="showPage('subagents')">
+                        <span class="nav-icon">🤖</span>
+                        Sub-Agents
+                    </div>
+                    <div class="nav-item" onclick="showPage('memory')">
+                        <span class="nav-icon">🧠</span>
+                        Memory
+                    </div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">System</div>
+                    <div class="nav-item" onclick="showPage('cron')">
+                        <span class="nav-icon">⏰</span>
+                        Cron Jobs
+                    </div>
+                    <div class="nav-item" onclick="showPage('logs')">
+                        <span class="nav-icon">📜</span>
+                        Logs
+                    </div>
+                    <div class="nav-item" onclick="showPage('settings')">
+                        <span class="nav-icon">⚙️</span>
+                        Settings
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="status-card">
+                <div class="status-header">
+                    <div class="status-dot"></div>
+                    <div class="status-label">System Online</div>
+                </div>
+                <div class="status-details">
+                    Model: Claude Opus 4.5<br>
+                    Uptime: 24/7<br>
+                    Last activity: just now
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main" id="mainContent">
+            <!-- Overview Page (default) -->
+            <div id="page-overview">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Guten Abend, Chris 👋</h1>
+                        <p class="page-subtitle">Hier ist dein Überblick für heute</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary" onclick="location.reload()">🔄 Refresh</button>
+                    </div>
+                </div>
+                
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">📁</div>
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">Aktive Kundenprojekte</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">🧩</div>
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Installierte Skills</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">🤖</div>
+                        <div class="stat-value">∞</div>
+                        <div class="stat-label">Sub-Agent Capacity</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">📝</div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Memory Files</div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">⚡ Quick Actions</h2>
+                    </div>
+                    <div class="quick-actions">
+                        <a class="action-btn" href="https://automatiks.io" target="_blank">
+                            <div class="action-icon">🌐</div>
+                            <div>
+                                <div class="action-text">automatiks.io</div>
+                                <div class="action-hint">Website öffnen</div>
+                            </div>
+                        </a>
+                        <a class="action-btn" href="https://medxperts.automatiks.io" target="_blank">
+                            <div class="action-icon">👥</div>
+                            <div>
+                                <div class="action-text">MedXperts</div>
+                                <div class="action-hint">Kunde öffnen</div>
+                            </div>
+                        </a>
+                        <a class="action-btn" href="https://github.com/automatiksio" target="_blank">
+                            <div class="action-icon">🐙</div>
+                            <div>
+                                <div class="action-text">GitHub</div>
+                                <div class="action-hint">Repositories</div>
+                            </div>
+                        </a>
+                        <a class="action-btn" href="https://dash.cloudflare.com" target="_blank">
+                            <div class="action-icon">☁️</div>
+                            <div>
+                                <div class="action-text">Cloudflare</div>
+                                <div class="action-hint">DNS & Pages</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🕐 Letzte Aktivitäten</h2>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Heute, 18:36</div>
+                                    <div class="timeline-content">automatiks.io live geschaltet (GitHub Pages + Cloudflare)</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Heute, 17:39</div>
+                                    <div class="timeline-content">MedXperts Landing aktualisiert (Website-Kachel hinzugefügt)</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Heute, 17:20</div>
+                                    <div class="timeline-content">GitHub Repo automatiksio/automatiks-website erstellt</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Heute, 19:54</div>
+                                    <div class="timeline-content">6 Skills installiert (todoist, calendar, email, n8n, homeassistant, github)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Clients Page -->
+            <div id="page-clients" style="display:none">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Kundenprojekte</h1>
+                        <p class="page-subtitle">Übersicht aller aktiven Projekte</p>
+                    </div>
+                </div>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">MedXperts</div>
+                                <div class="card-subtitle">Healthcare Vermittlung</div>
+                            </div>
+                            <span class="badge badge-success">Live</span>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <td>🌐 Website</td>
+                                    <td><a href="https://medxperts.automatiks.io" target="_blank" style="color:var(--accent)">medxperts.automatiks.io</a></td>
+                                </tr>
+                                <tr>
+                                    <td>📊 Präsentation</td>
+                                    <td><a href="https://medxperts.automatiks.io/presentation/" target="_blank" style="color:var(--accent)">/presentation</a></td>
+                                </tr>
+                                <tr>
+                                    <td>📋 Dashboard</td>
+                                    <td><a href="https://medxperts.automatiks.io/dashboard/" target="_blank" style="color:var(--accent)">/dashboard</a></td>
+                                </tr>
+                                <tr>
+                                    <td>🐙 Repo</td>
+                                    <td><a href="https://github.com/automatiksio/client-medxperts" target="_blank" style="color:var(--accent)">client-medxperts</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skills Page -->
+            <div id="page-skills" style="display:none">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Skills</h1>
+                        <p class="page-subtitle">Installierte Fähigkeiten und Integrationen</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">✅ Aktiv (bereit zur Nutzung)</h2>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-tag active">📧 email v1.1.0</div>
+                        <div class="skill-tag active">🐙 github v1.0.0</div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">⏳ Benötigen API Keys</h2>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-tag pending">✅ todoist v0.2.1</div>
+                        <div class="skill-tag pending">📅 google-calendar v0.1.0</div>
+                        <div class="skill-tag pending">🏠 homeassistant v1.0.0</div>
+                        <div class="skill-tag pending">⚡ n8n-workflow v1.0.0</div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">📋 Benötigte Credentials</h2>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Skill</th>
+                                        <th>Benötigt</th>
+                                        <th>Quelle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>todoist</td>
+                                        <td>TODOIST_API_TOKEN</td>
+                                        <td>todoist.com/app/settings/integrations/developer</td>
+                                    </tr>
+                                    <tr>
+                                        <td>google-calendar</td>
+                                        <td>OAuth Refresh Token</td>
+                                        <td>Google Cloud Console</td>
+                                    </tr>
+                                    <tr>
+                                        <td>homeassistant</td>
+                                        <td>HA_URL, HA_TOKEN</td>
+                                        <td>Home Assistant → Profil → Long-Lived Token</td>
+                                    </tr>
+                                    <tr>
+                                        <td>n8n-workflow</td>
+                                        <td>n8n URL + Credentials</td>
+                                        <td>Deine n8n Instanz</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sub-Agents Page -->
+            <div id="page-subagents" style="display:none">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Sub-Agents</h1>
+                        <p class="page-subtitle">Parallele Arbeiter für komplexe Aufgaben</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🤖 Was sind Sub-Agents?</h2>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <p style="margin-bottom:16px">Sub-Agents sind parallele Sessions, die ich spawnen kann um Aufgaben im Hintergrund zu erledigen. Perfekt für:</p>
+                            <ul style="color:var(--muted); padding-left:20px">
+                                <li>Längere Recherchen ohne Blockierung</li>
+                                <li>Parallele Code-Reviews</li>
+                                <li>Batch-Verarbeitung (z.B. mehrere Deployments)</li>
+                                <li>Komplexe Analysen die Zeit brauchen</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">📋 Verfügbare Workflows</h2>
+                    </div>
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">🔍 Deep Research</div>
+                                <span class="badge badge-info">Ready</span>
+                            </div>
+                            <div class="card-body">
+                                <p style="color:var(--muted);font-size:0.9rem">Umfassende Recherche zu einem Thema mit Quellen und Zusammenfassung</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">🚀 Batch Deploy</div>
+                                <span class="badge badge-info">Ready</span>
+                            </div>
+                            <div class="card-body">
+                                <p style="color:var(--muted);font-size:0.9rem">Mehrere Projekte parallel deployen</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">📊 Report Generator</div>
+                                <span class="badge badge-info">Ready</span>
+                            </div>
+                            <div class="card-body">
+                                <p style="color:var(--muted);font-size:0.9rem">Automatische Reports aus verschiedenen Datenquellen</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Memory Page -->
+            <div id="page-memory" style="display:none">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Memory System</h1>
+                        <p class="page-subtitle">Mein Langzeit-Gedächtnis</p>
+                    </div>
+                </div>
+                
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr)">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">📝</div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Daily Memory Files</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">🧠</div>
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">MEMORY.md (Long-term)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">🔍</div>
+                        <div class="stat-value">—</div>
+                        <div class="stat-label">Embeddings (needs API)</div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">📁 Memory Files</h2>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Datei</th>
+                                        <th>Zweck</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>MEMORY.md</td>
+                                        <td>Langzeit-Gedächtnis, kuratierte Erinnerungen</td>
+                                        <td><span class="badge badge-success">Aktiv</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>memory/2026-01-30.md</td>
+                                        <td>Tageslog: Security Audit, Brand Assets</td>
+                                        <td><span class="badge badge-info">Archiv</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>memory/2026-01-31.md</td>
+                                        <td>Tageslog: EA Framework, Website Updates</td>
+                                        <td><span class="badge badge-info">Archiv</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>memory/2026-02-01.md</td>
+                                        <td>Tageslog: Voice AI, Website Launch</td>
+                                        <td><span class="badge badge-success">Heute</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cron Page -->
+            <div id="page-cron" style="display:none">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Cron Jobs</h1>
+                        <p class="page-subtitle">Geplante automatische Aufgaben</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Job</th>
+                                    <th>Schedule</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Morning Briefing</td>
+                                    <td>Täglich 07:00 (Europe/Berlin)</td>
+                                    <td><span class="badge badge-success">Aktiv</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Heartbeat Check</td>
+                                    <td>Alle 30 Minuten</td>
+                                    <td><span class="badge badge-success">Aktiv</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Logs Page -->
+            <div id="page-logs" style="display:none">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">System Logs</h1>
+                        <p class="page-subtitle">Letzte Aktivitäten und Events</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body" style="font-family:monospace; font-size:0.85rem; color:var(--muted)">
+                        <div>[19:55] Skills installed: todoist, google-calendar, email, n8n, homeassistant, github</div>
+                        <div>[19:47] Sub-Agent test completed successfully</div>
+                        <div>[18:36] automatiks.io deployed to GitHub Pages</div>
+                        <div>[17:39] MedXperts landing updated</div>
+                        <div>[17:20] Repository automatiksio/automatiks-website created</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings Page -->
+            <div id="page-settings" style="display:none">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Settings</h1>
+                        <p class="page-subtitle">Konfiguration und Credentials</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🔑 API Keys</h2>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Service</th>
+                                        <th>Status</th>
+                                        <th>Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>GitHub</td>
+                                        <td><span class="badge badge-success">✅ Configured</span></td>
+                                        <td>.secrets/api-keys.md</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cloudflare</td>
+                                        <td><span class="badge badge-success">✅ Configured</span></td>
+                                        <td>.secrets/api-keys.md</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Anthropic</td>
+                                        <td><span class="badge badge-success">✅ Configured</span></td>
+                                        <td>auth-profiles.json</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Brave Search</td>
+                                        <td><span class="badge badge-success">✅ Configured</span></td>
+                                        <td>Gateway Config</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Todoist</td>
+                                        <td><span class="badge badge-warning">⏳ Needed</span></td>
+                                        <td>—</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Google Calendar</td>
+                                        <td><span class="badge badge-warning">⏳ Needed</span></td>
+                                        <td>—</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('[id^="page-"]').forEach(p => p.style.display = 'none');
+            // Show selected page
+            document.getElementById('page-' + pageId).style.display = 'block';
+            // Update nav
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+        }
+        
+        // Update greeting based on time
+        const hour = new Date().getHours();
+        let greeting = 'Guten Tag';
+        if (hour < 12) greeting = 'Guten Morgen';
+        else if (hour < 18) greeting = 'Guten Tag';
+        else greeting = 'Guten Abend';
+        document.querySelector('.page-title').textContent = greeting + ', Chris 👋';
+    </script>
+</body>
+</html>

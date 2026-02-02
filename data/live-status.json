@@ -1,0 +1,146 @@
+{
+  "online": true,
+  "lastUpdate": "2026-01-31T16:00:00Z",
+  "status": "Aktiv",
+  "currentTask": "Dashboard Live-Tracking fertigstellen",
+  "model": "claude-opus-4-5",
+  "contextUsage": 86,
+  "subAgents": 0,
+  "activities": [
+    {
+      "timestamp": "2026-01-31T16:00:00Z",
+      "type": "tool_call",
+      "tool": "edit",
+      "description": "Dashboard aktualisiert",
+      "details": "Live-Status Anzeige, detailliertes Activity-Log"
+    },
+    {
+      "timestamp": "2026-01-31T15:58:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "API Status Script erstellt",
+      "details": "dashboard/api/status.js — Session-Daten Parser"
+    },
+    {
+      "timestamp": "2026-01-31T15:55:00Z",
+      "type": "tool_call",
+      "tool": "session_status",
+      "description": "Session-Daten abgefragt",
+      "details": "Context: 86%, Model: claude-opus-4-5"
+    },
+    {
+      "timestamp": "2026-01-31T15:53:00Z",
+      "type": "user_message",
+      "description": "Nachricht von Chris",
+      "details": "Live-Tracking wie bei Nate Herk gewünscht — Status, Sub-Agents, detaillierte Aktivitäten"
+    },
+    {
+      "timestamp": "2026-01-31T15:50:00Z",
+      "type": "response",
+      "description": "Antwort gesendet",
+      "details": "Neue Tunnel-Links für MedExperts bereitgestellt"
+    },
+    {
+      "timestamp": "2026-01-31T15:45:00Z",
+      "type": "tool_call",
+      "tool": "exec",
+      "description": "Tunnel neu gestartet",
+      "details": "npx localtunnel --port 8080 → few-chicken-show.loca.lt"
+    },
+    {
+      "timestamp": "2026-01-31T15:30:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "Dashboard JavaScript erstellt",
+      "details": "dashboard/app.js — Task-Rendering, Navigation, Filter"
+    },
+    {
+      "timestamp": "2026-01-31T15:25:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "Dashboard Styles erstellt",
+      "details": "dashboard/styles.css — Dark Theme, Status Cards, Panels"
+    },
+    {
+      "timestamp": "2026-01-31T15:20:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "Dashboard HTML erstellt",
+      "details": "dashboard/index.html — Sidebar, Views, Panels"
+    },
+    {
+      "timestamp": "2026-01-31T15:15:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "Task-Datenbank angelegt",
+      "details": "dashboard/data/tasks.json — Alle Tasks + Projekte"
+    },
+    {
+      "timestamp": "2026-01-31T15:10:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "API-Dokumentation erstellt",
+      "details": "Todoist, ClickUp, Google Calendar Integration Specs"
+    },
+    {
+      "timestamp": "2026-01-31T15:00:00Z",
+      "type": "user_message",
+      "description": "Nachricht von Chris",
+      "details": "Dashboard bauen, echte Daten, Datenstruktur anlegen, API-Recherche"
+    },
+    {
+      "timestamp": "2026-01-31T14:55:00Z",
+      "type": "user_message",
+      "description": "Logo erhalten",
+      "details": "medXperts healthcare Logo — Orange/Pink/Teal Gradient"
+    },
+    {
+      "timestamp": "2026-01-31T14:30:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "MedExperts Website überarbeitet",
+      "details": "Professioneller Look, SVG Icons, Gradient-Hintergründe, Whitman-Copy"
+    },
+    {
+      "timestamp": "2026-01-31T12:30:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "Präsentation erstellt",
+      "details": "16 Slides — Pain Points → Lösungen → Demo → Preise → Next Steps"
+    },
+    {
+      "timestamp": "2026-01-31T12:25:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "Berater-Verwaltung erstellt",
+      "details": "Dashboard mit Stats, Berater, Aufträge, Provisionen, Kunden"
+    },
+    {
+      "timestamp": "2026-01-31T12:20:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "MedExperts Website gebaut",
+      "details": "Landing Page, Pain Points, Leistungen, Netzwerk, Kontakt"
+    },
+    {
+      "timestamp": "2026-01-31T10:05:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "Voice AI Businessplan erstellt",
+      "details": "Komplette Kostenrechnung: Fonio vs. eigener Stack"
+    },
+    {
+      "timestamp": "2026-01-31T10:00:00Z",
+      "type": "tool_call",
+      "tool": "write",
+      "description": "EU/DE KI-Strategie erstellt",
+      "details": "GoHighLevel-Alternativen für Voice & Chat"
+    },
+    {
+      "timestamp": "2026-01-31T09:15:00Z",
+      "type": "user_message",
+      "description": "Nachricht von Chris",
+      "details": "Self-hosted Notion Alternativen? NocoDB, API-fähig, n8n-kompatibel"
+    }
+  ]
+}
